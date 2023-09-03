@@ -13,8 +13,8 @@ export async function getUsers() {
 export async function createUser(user: {
   id: string;
   email: string;
-  name: string | undefined;
-  imageUrl: string | undefined;
+  name: string;
+  imageUrl: string;
 }) {
   try {
     const userFromDB = await prisma.user.create({ data: user });
