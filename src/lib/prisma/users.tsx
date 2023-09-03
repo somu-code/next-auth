@@ -1,5 +1,9 @@
 import prisma from ".";
 
+type Tweet = {
+  createMany: { data: { body: string; likes: number }[] };
+};
+
 export async function getUsers() {
   try {
     const users = await prisma.user.findMany();
@@ -15,6 +19,7 @@ export async function createUser(user: {
   email: string;
   name: string;
   imageUrl: string;
+  tweets: Tweet[];
 }) {
   try {
     const userFromDB = await prisma.user.create({ data: user });
