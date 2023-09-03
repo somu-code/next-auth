@@ -4,6 +4,13 @@ type Tweet = {
   createMany: { data: { body: string; likes: number }[] };
 };
 
+type User = {
+  id: string;
+  email: string;
+  name: string;
+  imageUrl: string;
+};
+
 export async function getUsers() {
   try {
     const users = await prisma.user.findMany();
@@ -14,13 +21,7 @@ export async function getUsers() {
   }
 }
 
-export async function createUser(user: {
-  id: string;
-  email: string;
-  name: string;
-  imageUrl: string;
-  tweets: Tweet[];
-}) {
+export async function createUser(user: User) {
   try {
     const userFromDB = await prisma.user.create({ data: user });
     return { user: userFromDB };

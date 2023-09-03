@@ -11,5 +11,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { userId: string } }) {
   const { user } = await getUserById(params.userId);
-  return <User user={user} />;
+  if (user) {
+    return <User user={user} />;
+  }
 }
