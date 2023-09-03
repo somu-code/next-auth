@@ -19,6 +19,8 @@ export default function User({
             alt={user?.name}
             style={{ objectFit: "cover" }}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={true}
           />
         </div>
         <h1 className="text-xl font-bold">{user?.name}</h1>
