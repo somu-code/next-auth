@@ -4,14 +4,16 @@ import User from "./user";
 export async function generateStaticParams() {
   const { users } = await getUsers();
 
-  return users?.map((user) => {
-    userId: user.id;
-  });
+  return users?.map((user) => ({
+    userId: user.id,
+  })) || [];
 }
 
 export default async function Page({ params }: { params: { userId: string } }) {
   const { user } = await getUserById(params.userId);
   if (user) {
     return <User user={user} />;
+  } else {
+    return;
   }
 }
