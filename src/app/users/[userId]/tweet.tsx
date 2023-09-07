@@ -8,11 +8,14 @@ export default function Tweet({
   tweet: { id: string; body: string; likes: number; userId: string };
 }) {
   const [likes, setLikes] = useState(tweet.likes);
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(null);
   useEffect(() => {
-    if (liked === false) return;
+    if (liked === null) return;
+    const endPoint = liked
+      ? `/api/tweets/${tweet.id}/like`
+      : `/api/tweets/${tweet.id}/unlike`;
     async function fetchData() {
-      const response = await fetch(`/api/tweets/${tweet.id}/like`, {
+      const response = await fetch(endPoint, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +34,7 @@ export default function Tweet({
       <p>{tweet.body}</p>
       <div className="flex flex-row gap-2">
         {liked ? (
-          <button onClick={() => setLiked(liked)}>Unlike</button>
+          <button onClick={() => setLiked((liked) => !liked)}>Unlike</button>
         ) : (
           <button onClick={() => setLiked((liked) => !liked)}>Like</button>
         )}

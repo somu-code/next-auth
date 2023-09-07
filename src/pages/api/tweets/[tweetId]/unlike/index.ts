@@ -1,4 +1,4 @@
-import { likeTweet } from "@/lib/prisma/tweet";
+import { unlikeTweet } from "@/lib/prisma/tweet";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function Handler(
@@ -8,11 +8,10 @@ export default async function Handler(
   if (req.method === "PATCH") {
     try {
       const { tweetId } = req.query;
-      const { tweet, error } = await likeTweet({ tweetId });
+      const { tweet, error } = await unlikeTweet({ tweetId });
       if (error) throw new Error(JSON.stringify(error));
       return res.status(200).json({ tweet });
     } catch (error) {
-      console.error(error);
       return res.status(500).json({ error });
     }
   }
