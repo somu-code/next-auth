@@ -8,7 +8,7 @@ type User = {
   id: string;
   email: string;
   name: string;
-  imageUrl: string;
+  image: string;
 };
 
 export async function getUsers() {
